@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler_flutter/Question.dart';
 
+import 'QuizzBrain.dart';
+
+QuizzBrain quizzBrain = QuizzBrain();
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -27,23 +29,13 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<Question> questionsBank = [
-    Question(
-        questionText: 'You can lead a cow down stairs but not up stairs.',
-        questionAnswer: false),
-    Question(
-        questionText:
-            'Approximately one quarter of human bones are in the feet.',
-        questionAnswer: true),
-    Question(questionText: 'A slug\'s blood is green.', questionAnswer: true)
-  ];
 
-  int questionNumbers = 0;
+  int questionNumber = 0;
 
   void incrementItem() {
-    questionNumbers += 1;
-    if (questionNumbers >= questionsBank.length) {
-      questionNumbers = 0;
+    questionNumber += 1;
+    if (questionNumber >= quizzBrain.getLength()) {
+      questionNumber = 0;
     }
   }
 
@@ -59,7 +51,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionsBank[questionNumbers].questionText,
+                quizzBrain.getQuestionText(questionNumber),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -86,13 +78,13 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   bool correctAnswer =
-                      questionsBank[questionNumbers].questionAnswer;
+                      quizzBrain.getQuestionAnswer(questionNumber);
                   if (correctAnswer == true) {
                     print('You got it right!');
                   } else {
                     print('You got it wrong!');
                   }
-                  if (scoreKeeper.length < questionsBank.length) {
+                  if (scoreKeeper.length < quizzBrain.getLength()) {
                     scoreKeeper.add(
                       Icon(
                         Icons.check,
@@ -124,15 +116,13 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   bool correctAnswer =
-                      questionsBank[questionNumbers].questionAnswer;
+                      quizzBrain.getQuestionAnswer(questionNumber);
                   if (correctAnswer == false) {
                     print('You got it right!');
                   } else {
                     print('You got it wrong!');
                   }
-                  if (scoreKeeper.length < questionsBank.length) {
-                    print(
-                        '${scoreKeeper.length} - < ?  - ${questionsBank.length}');
+                  if (scoreKeeper.length < quizzBrain.getLength()) {
                     scoreKeeper.add(
                       Icon(
                         Icons.close,

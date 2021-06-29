@@ -1,13 +1,8 @@
 import 'Question.dart';
 
 class QuizzBrain {
+  // ---------------------------------------------------------------------------
   int _questionNumber = 0;
-
-  int get questionNumber => _questionNumber;
-
-  set questionNumber(int value) {
-    _questionNumber = value;
-  }
 
   List<Question> _questionsBank = [
     Question(
@@ -39,26 +34,57 @@ class QuizzBrain {
         'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         true)
   ];
+  // ---------------------------------------------------------------------------
+  List<Question> get questionsBank => _questionsBank;
 
-  String getQuestionText(int questionNumber) {
-    return _questionsBank[questionNumber].questionText;
+  int get questionNumber => _questionNumber;
+
+  set scoreKeeper(List scoreKeeper) {}
+
+  set questionNumber(int value) {
+    _questionNumber = value;
   }
 
-  bool getQuestionAnswer() {
-    return _questionsBank[questionNumber].questionAnswer;
-  }
+  // String getQuestionText(int questionNumber) {
+  //   return _questionsBank[questionNumber].questionText;
+  // }
+
+  // bool getQuestionAnswer() {
+  //   return _questionsBank[questionNumber].questionAnswer;
+  // }
 
   int getLength() {
     return _questionsBank.length;
   }
 
+  // ---------------------------------------------------------------------------
   void nextQuestion() {
     // questionNumber += 1;
     // if (questionNumber >= getLength()) {
     //   questionNumber = 0;
     // }
     if (questionNumber < _questionsBank.length - 1) {
-      questionNumber++;
+      _questionNumber++;
     }
+  }
+
+  bool isFinished() {
+    if (_questionNumber >= _questionsBank.length - 1) {
+      //TODO: Step 3 Part B - Use a print statement to check that isFinished is returning true when you are indeed at the end of the quiz and when a restart should happen.
+      print('Now returning true');
+      return true;
+    } else {
+      return false;
+    }
+    print(
+        'question n° ${_questionNumber} taille (${_questionsBank.length - 1})');
+  }
+
+  String currentQuestion() {
+    return _questionsBank.elementAt(_questionNumber).questionText;
+  }
+
+  bool currentAnswer() {
+    return _questionsBank.elementAt(_questionNumber).questionAnswer;
   }
 }

@@ -2,13 +2,9 @@ class Question {
   /**
    * links a question ant its answer.
    */
-  String questionText = '';
+  String questionText;
 
-  // ignore: file_names
-  bool questionAnswer = false;
+  bool questionAnswer;
 
-  Question(String questionText, bool questionAnswer) {
-    this.questionText = questionText;
-    this.questionAnswer = questionAnswer;
-  }
+  Question(this.questionText, this.questionAnswer);
 }

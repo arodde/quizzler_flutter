@@ -1,3 +1,9 @@
+# contexte : 
+
+Je suis cette formation de flutter. dans le projet ci-dessous l'utilisateur répond à une succession de questions et le résultat valide ou invalide de sa réponse apparait.
+
+
+
 ![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
 
 
